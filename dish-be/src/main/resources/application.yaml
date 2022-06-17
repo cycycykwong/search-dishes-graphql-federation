@@ -1,0 +1,16 @@
+spring:
+    profiles:
+        active: ${ENVIRONMENT:local}
+    data:
+        mongodb:
+            host: ${DB_HOST}
+            port: ${DB_PORT}
+            username: ${DB_USERNAME}
+            password: ${DB_PASSWORD}
+            database: dish_demo_db
+            authentication-database: admin
+
+server:
+    servlet:
+        context-path: /api/dish
+    port: 9000
