@@ -42,7 +42,7 @@ tasks.withType<Test> {
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
 	generateClient = true
 	generateInterfaces = true
-	packageName = "com.cyclopes.generated"
+	packageName = "com.cycycykwong.generated"
 }
 
 jib {

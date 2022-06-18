@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  dish-mongo:
+    container_name: dish-mongo
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: cycycykwong
+      MONGO_INITDB_ROOT_PASSWORD: GoodMorning
+    volumes:
+      - ./data/db:/data/db
+    restart: always
