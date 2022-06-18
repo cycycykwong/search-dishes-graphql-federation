@@ -2,12 +2,11 @@ type Query {
     restaurants: [Restaurant]
 }
 
-#type Dish @key(fields: "id") @extends {
-#    id: ID!
-#    restaurant: Restaurant
-#}
+type Mutation {
+    addRestaurant(name: String, address: String): Restaurant
+}
 
-type Restaurant {
+type Restaurant @key(fields: "id") {
     id: ID!
     name: String
     address: String

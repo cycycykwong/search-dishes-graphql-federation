@@ -14,9 +14,13 @@ data class RestaurantEntity(
 )
 
 fun List<RestaurantEntity>.toRestaurants(): List<Restaurant> {
-    return this.map { Restaurant(
-        id = it.id.toString(),
-        name = it.name,
-        address = it.address
-    ) }
+    return this.map { it.toRestaurant() }
+}
+
+fun RestaurantEntity.toRestaurant(): Restaurant {
+    return Restaurant(
+        id = this.id.toString(),
+        name = this.name,
+        address = this.address
+    )
 }

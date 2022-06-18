@@ -21,6 +21,7 @@ services:
       - 9000
     environment:
       - DB_HOST=dish-mongo
+      - DB_PORT=27017
     restart: always
     depends_on:
       - dish-mongo
@@ -32,6 +33,7 @@ services:
       - 9000
     environment:
       - DB_HOST=dish-mongo
+      - DB_PORT=27017
     restart: always
     depends_on:
       - dish-mongo

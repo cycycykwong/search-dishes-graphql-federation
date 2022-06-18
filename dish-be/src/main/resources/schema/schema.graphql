@@ -2,8 +2,17 @@ type Query {
     dishes: [Dish]
 }
 
+type Mutation {
+    addDish(restaurantId: String, name: String, price: Float): Dish
+}
+
 type Dish @key(fields: "id") {
     id: ID!
+    restaurant: Restaurant @provides(fields: "id")
     name: String
     price: Float
+}
+
+type Restaurant @key(fields: "id") {
+    id: ID!
 }

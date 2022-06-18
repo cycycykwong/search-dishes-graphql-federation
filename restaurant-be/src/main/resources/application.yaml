@@ -7,8 +7,8 @@ spring:
             port: ${DB_PORT}
             username: ${DB_USERNAME}
             password: ${DB_PASSWORD}
-            database: dish_demo_db
-            authentication-database: admin
+            database: ${DB_NAME}
+            authentication-database: ${DB_AUTH_DATABASE}
 
 server:
     servlet:

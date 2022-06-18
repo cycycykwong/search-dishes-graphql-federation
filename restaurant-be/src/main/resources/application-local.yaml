@@ -1,7 +1,7 @@
 spring:
     data:
         mongodb:
-            host: localhost
-            port: 27017
             username: cycycykwong
             password: GoodMorning
+            database: dish_demo_db
+            authentication-database: admin
