@@ -5,4 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface DishRepository : MongoRepository<DishEntity, String>
+interface DishRepository : MongoRepository<DishEntity, String> {
+    fun findByRestaurantId(restaurantId: String): List<DishEntity>
+}
+

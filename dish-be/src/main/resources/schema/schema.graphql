@@ -13,6 +13,7 @@ type Dish @key(fields: "id") {
     price: Float
 }
 
-type Restaurant @key(fields: "id") {
+type Restaurant @key(fields: "id") @extends {
     id: ID!
+    dishes: [Dish]
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service
 
 interface DishService {
     fun dishes(): List<Dish>
+    fun dishesByRestaurantId(restaurantId: String): List<Dish>
     fun addDish(restaurantId: String, name: String, price: Double): Dish
 }
 
@@ -17,6 +18,10 @@ interface DishService {
 class SimpleDishService(@Autowired val dishRepository: DishRepository): DishService {
     override fun dishes(): List<Dish> {
         return dishRepository.findAll().toDishes()
+    }
+
+    override fun dishesByRestaurantId(restaurantId: String): List<Dish> {
+        return dishRepository.findByRestaurantId(restaurantId).toDishes()
     }
 
     override fun addDish(restaurantId: String, name: String, price: Double): Dish {
