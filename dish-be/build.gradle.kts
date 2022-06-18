@@ -12,6 +12,7 @@ plugins {
 group = "com.cycycykwong"
 version = "latest"
 java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
@@ -30,7 +31,6 @@ dependencies {
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "17"
 	}
 }
@@ -47,7 +47,7 @@ tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
 
 jib {
 	from {
-		image = "amazoncorretto:11"
+		image = "amazoncorretto:17"
 	}
 	to {
 		image = "dish-be"

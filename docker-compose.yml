@@ -1,6 +1,41 @@
 version: '3.1'
 
 services:
+  federation-gateway:
+    container_name: search-dish-federation-gateway
+    image: search-dish-federation-gateway:latest
+    ports:
+      - 9000:9000
+    environment:
+      - HOST_NAME=federation-gateway
+      - RESTAURANT_SERVICE=restaurant-be:9000
+      - DISH_SERVICE=dish-be:9000
+    restart: always
+    depends_on:
+      - dish-mongo
+  
+  restaurant-be:
+    container_name: restaurant-be
+    image: restaurant-be:latest
+    expose:
+      - 9000
+    environment:
+      - DB_HOST=dish-mongo
+    restart: always
+    depends_on:
+      - dish-mongo
+  
+  dish-be:
+    container_name: dish-be
+    image: dish-be:latest
+    expose:
+      - 9000
+    environment:
+      - DB_HOST=dish-mongo
+    restart: always
+    depends_on:
+      - dish-mongo
+
   dish-mongo:
     container_name: dish-mongo
     image: mongo
