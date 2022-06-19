@@ -1,3 +1,4 @@
+###### With best practices ######
 # First stage
 FROM node:alpine as FirstStage
 
@@ -8,13 +9,11 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY tsconfig.json ./
 
-RUN npm install --frozen-lockfile
-
 # Copy source files
-COPY . .
+COPY index.ts .
 
 # Build app and remove Dev Dependencies
-RUN npm install
+RUN npm ci --production
 
 # Final stage
 FROM node:alpine
@@ -28,3 +27,20 @@ EXPOSE 9000
 
 # Run the app
 CMD [ "npm", "start" ]
+
+# ###### Without best practices ######
+# FROM node
+
+# # Create app directory
+# WORKDIR /usr/src/app
+
+# # Copy source files
+# COPY . .
+
+# # Build app
+# RUN npm install
+
+# EXPOSE 9000
+
+# # Run the app
+# CMD [ "npm", "start" ]
