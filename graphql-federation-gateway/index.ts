@@ -1,10 +1,11 @@
 import * as dotenv from 'dotenv';
 
 import { ApolloServer } from 'apollo-server';
+import { ApolloServerPluginInlineTrace } from "apollo-server-core";
+
 import {
   ApolloGateway,
   IntrospectAndCompose,
-  RemoteGraphQLDataSource,
 } from '@apollo/gateway';
 
 dotenv.config();
@@ -31,7 +32,7 @@ const gateway = new ApolloGateway({
 
 const server = new ApolloServer({
   gateway,
-  debug: true,
+  plugins: [ApolloServerPluginInlineTrace()],
 });
 
 server.listen(port, hostService).then(({ url }) => {

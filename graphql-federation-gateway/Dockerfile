@@ -37,7 +37,7 @@ CMD [ "npm", "start" ]
 # # Copy source files
 # COPY . .
 
-# # Build app
+# # Install dependencies                                      
 # RUN npm install
 
 # EXPOSE 9000

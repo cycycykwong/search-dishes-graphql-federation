@@ -4,12 +4,17 @@ import com.cycycykwong.generated.types.Dish
 import com.cycycykwong.dish.service.DishService
 import com.cycycykwong.generated.types.Restaurant
 import com.netflix.graphql.dgs.*
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import java.util.concurrent.CompletableFuture
 
 @DgsComponent
 class DishDataFetcher(@Autowired val dishService: DishService) {
+    val logger = LoggerFactory.getLogger(DishDataFetcher::class.java)
+
     @DgsQuery
     fun dishes(): List<Dish> {
+        logger.info("Get all dishes")
         return dishService.dishes()
     }
 
@@ -19,8 +24,10 @@ class DishDataFetcher(@Autowired val dishService: DishService) {
     }
 
     @DgsData(parentType = "Restaurant", field = "dishes")
-    fun restaurantDishes(dataFetchingEnvironment: DgsDataFetchingEnvironment): List<Dish> {
+    fun restaurantDishes(dataFetchingEnvironment: DgsDataFetchingEnvironment): CompletableFuture<List<Dish>> {
         val restaurant = dataFetchingEnvironment.getSource<Restaurant>()
-        return dishService.dishesByRestaurantId(restaurant.id)
+        val dataLoader = dataFetchingEnvironment.getDataLoader<String, List<Dish>>("dishes")
+
+        return dataLoader.load(restaurant.id)
     }
 }

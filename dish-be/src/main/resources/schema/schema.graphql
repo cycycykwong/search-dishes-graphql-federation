@@ -8,7 +8,7 @@ type Mutation {
 
 type Dish @key(fields: "id") {
     id: ID!
-    restaurant: Restaurant @provides(fields: "id")
+    restaurant: Restaurant! @provides(fields: "id")
     name: String
     price: Float
 }
